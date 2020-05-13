@@ -1,8 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import io from 'socket.io-client';
+const ENDPOINT = "http://127.0.0.1:4242";
 
 function App() {
+  const socket = io(ENDPOINT);
+
   return (
     <div className="App">
       <header className="App-header">
