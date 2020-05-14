@@ -1,28 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import io from 'socket.io-client';
+import Testform from './components/testform.component';
 const ENDPOINT = "http://127.0.0.1:4242";
 
+
 function App() {
-  const socket = io(ENDPOINT);
+  // const socket = io(ENDPOINT);
+
+  // socket.on('message', msg => {
+  //   console.log(msg);
+  // });
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      <h1>okokok</h1>
+      <Testform />
     </div>
   );
 }

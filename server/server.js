@@ -8,7 +8,12 @@ const io = require('socket.io')(server);
 // });
 
 io.on('connection', socket => {
-    console.log('connected !');
+    console.log('A user connected');
+    socket.emit('message', 'Connected to server');
+    socket.on('message', msg => {
+        console.log('wtf');
+        socket.broadcast.emit('message', msg);
+    });
 });
 
 
