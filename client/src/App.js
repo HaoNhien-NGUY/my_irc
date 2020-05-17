@@ -1,23 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import io from 'socket.io-client';
-import Testform from './components/testform.component';
-const ENDPOINT = "http://127.0.0.1:4242";
-
+import LoginIndex from './components/login/loginIndex.component';
+import {userLogin} from './socketAPI';
+import ChatRoom from './components/chatLobby/chatRoom.component';
 
 function App() {
-  const socket = io(ENDPOINT);
+  const [username, setUsername] = useState(false);
 
-  socket.on('message', msg => {
-    console.log(msg);
-  });
-
-  socket.emit('login', 'golfyazz', 'roomtest');
+  const loginHanddle = (username) => {
+    setUsername(username);
+    userLogin(username);
+  }
 
   return (
-    <div className="">
-      <h1>okokok</h1>
-      {/* <Testform /> */}
+    <div>
+      {username ? <ChatRoom /> : <LoginIndex loginHanddle={loginHanddle} />}
     </div>
   );
 }

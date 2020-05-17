@@ -1,8 +1,30 @@
-.App {
-  text-align: center;
+body {
+  background-color: #7289da;
 }
 
-.App-logo {
+.login-card {
+  background-color: #ffffff	;
+  padding: 65px 0 50px 0;
+  border-radius: 10px;
+}
+
+.login-form {
+  padding: 0 15% 0 15%;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+
+
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -11,9 +33,9 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
+} */
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -35,4 +57,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
