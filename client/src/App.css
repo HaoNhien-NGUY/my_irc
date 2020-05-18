@@ -4,12 +4,60 @@ body {
 
 .login-card {
   background-color: #ffffff	;
-  padding: 65px 0 50px 0;
+  padding: 50px 0 50px 0;
   border-radius: 10px;
+  margin-bottom: 100px;
 }
 
 .login-form {
   padding: 0 15% 0 15%;
+}
+
+/* ------- chatrooms ------- */
+.user-list {
+  background-color: #afbcea ;
+  margin-bottom: 0px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.bottom-panel {
+  height: 54px;
+  background-color: #afbcea;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+
+.chat-input {
+  width: 93%;
+  height: 39px;
+  border-radius: 5px;
+  border: none;
+
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.chat-btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.messages-box {
+  background-color: #ffffff;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.message-form form {
+  width: 100%;
+  display: flex;
+}
+
+.message-form input {
+  flex: 2;
+  margin: 0px;
 }
 
 @keyframes fadeOut {

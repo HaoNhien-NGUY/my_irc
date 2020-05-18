@@ -8,7 +8,10 @@ io.on('connection', socket => {
     console.log('A user connected');
     // socket.on('login', )
 
-    socket.on('message', message => console.log(message));
+    socket.on('message', message => {
+        console.log(message);
+        socket.emit('message', message);
+    });
 
     socket.on('login', (username, room) => {
         console.log(`you are logged in as ${username}`);

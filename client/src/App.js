@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div>
-      {username ? <ChatRoom /> : <LoginIndex loginHanddle={loginHanddle} />}
+      {username ? <ChatRoom username={username} /> : <LoginIndex loginHanddle={loginHanddle} />}
     </div>
   );
 }
