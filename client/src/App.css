@@ -3,10 +3,10 @@ body {
 }
 
 .login-card {
-  background-color: #ffffff	;
+  background-color: #ffffff;
   padding: 50px 0 50px 0;
   border-radius: 10px;
-  margin-bottom: 100px;
+  margin-bottom: 50px;
 }
 
 .login-form {
@@ -14,8 +14,9 @@ body {
 }
 
 /* ------- chatrooms ------- */
+
 .user-list {
-  background-color: #afbcea ;
+  background-color: #a2b3f0;
   margin-bottom: 0px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
@@ -23,18 +24,16 @@ body {
 
 .bottom-panel {
   height: 54px;
-  background-color: #afbcea;
+  background-color: #a2b3f0;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
-
 
 .chat-input {
   width: 93%;
   height: 39px;
   border-radius: 5px;
   border: none;
-
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -48,6 +47,8 @@ body {
   background-color: #ffffff;
   margin-bottom: 15px;
   border-radius: 5px;
+  overflow-y: scroll;
+  height: 100%;
 }
 
 .message-form form {
@@ -60,6 +61,123 @@ body {
   margin: 0px;
 }
 
+/* ------- message card ------- */
+
+.message-card {
+  margin: 15px 20px 15px 30px;
+  padding: 15px 20px 5px 20px;
+  border-radius: 5px;
+  background-color: #7289da36;
+}
+
+.message-card .username {
+  color: #7289da;
+  margin-right: 5px;
+}
+
+.message-card .time {
+  margin-left: 5px;
+  font-weight: 400;
+  /* font-size: 90%; */
+}
+
+/* ------- scrollbar ------- */
+
+/* width */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 5px;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: #afbcea;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7289dac9;
+}
+
+/* ------- react-tabs ------- */
+
+.react-tabs {
+  -webkit-tap-highlight-color: transparent;
+  /* -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; */
+  padding: 0 48px;
+}
+
+.react-tabs__tab-list {
+  border-bottom: 1px solid #a2b3f0;
+  margin: 0 0 15px;
+  padding: 0;
+  border: solid #a2b3f0 1px;
+  border-radius: 5px;
+}
+
+.react-tabs__tab {
+  display: inline-block;
+  border: 1px solid transparent;
+  border-bottom: none;
+  /* bottom: -1px; */
+  position: relative;
+  list-style: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: white;
+}
+
+.react-tabs__tab--selected {
+  background: #a2b3f0;
+  border-color: #a2b3f0;
+  color: white;
+  border-radius: 5px;
+}
+
+/* .react-tabs__tab--disabled {
+  color: GrayText;
+  cursor: default;
+} */
+
+.react-tabs__tab:focus {
+  box-shadow: 0 0 5px hsl(208, 99%, 50%);
+  border-color: hsl(208, 99%, 50%);
+  outline: none;
+}
+
+.react-tabs__tab:focus:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+  background: #fff;
+}
+
+.react-tabs__tab-panel {
+  display: none;
+}
+
+.react-tabs__tab-panel--selected {
+  display: block;
+}
+
 @keyframes fadeOut {
   0% {
     opacity: 1;
@@ -68,9 +186,6 @@ body {
     opacity: 0;
   }
 }
-
-
-
 
 /* .App-logo {
   height: 40vmin;

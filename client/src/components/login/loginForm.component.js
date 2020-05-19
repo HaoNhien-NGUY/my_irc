@@ -15,13 +15,12 @@ function LoginForm(props) {
   }
 
   return (
-    <div className="login-form">
+    <div className="login-form pt-3">
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="usernameInput" className="ml-1 mb-2">Enter your username</label>
-          <input type="text" className="form-control" style={{fontSize:'20px'}} id="usernameInput" autoComplete="off" value={username} onChange={handleChange} />
-          <small id="emailHelp" className="form-text text-muted ml-1">Your username will be seen by everyone.</small>
-          <button type="submit" className="btn btn-outline-primary mt-4">Login</button>
+          {/* <label for="usernameInput" style={{fontSize:'120%', color:'#424549'}}>Enter your username</label> */}
+          <input type="text" placeholder="Enter your username" className="form-control" style={{ fontSize: '20px', borderColor:'#7289da' }} id="usernameInput" autoComplete="off" value={username} onChange={handleChange} />
+          <button type="submit" className="btn btn-outline-primary mt-3" style={{borderColor:'#7289da', color:'#7289da'}}>Login</button>
         </div>
       </form>
     </div>

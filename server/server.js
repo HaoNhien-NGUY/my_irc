@@ -6,16 +6,12 @@ const userManager = require('./services/users');
 
 io.on('connection', socket => {
     console.log('A user connected');
-    // socket.on('login', )
 
-    socket.on('message', message => {
-        console.log(message);
-        socket.emit('message', message);
-    });
-
-    socket.on('login', (username, room) => {
+    socket.on('login', (username) => {
+        socket.username = username;
         console.log(`you are logged in as ${username}`);
-        
+        socket.emit('message', 'Connected to server');
+
         // userManager.userJoinRoom(socket, username);
         // socket.join('testroom');
         // socket.firstname = 'benoit';
@@ -28,8 +24,21 @@ io.on('connection', socket => {
         // socket.emit('message', `your username is ${socket.username}`);
     });
 
+    socket.on('clientMessage', message => {
+        console.log({...message, author:socket.username});
+        io.emit(message.room, {...message,time: 'now', author:socket.username});
+    });
 
-    // socket.emit('message', 'Connected to server');
+    socket.on('joinRoom', room => {
+        //logique if room existe blabla
+        socket.join(room);
+        socket.to(room).emit('nice game', `${socket.username} has joined the chat`);
+    });
+
+    //event for global channel,
+    //event for all channel
+
+
     // socket.on('message', msg => {
     //     console.log('wtf');
     //     socket.broadcast.emit('message', msg);

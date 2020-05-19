@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import LoginIndex from './components/login/loginIndex.component';
 import {userLogin} from './socketAPI';
-import ChatRoom from './components/chatLobby/chatRoom.component';
+import ChatLobby from './components/chatLobby/chatLobby.component';
 
 function App() {
   const [username, setUsername] = useState(false);
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div>
-      {username ? <ChatRoom username={username} /> : <LoginIndex loginHanddle={loginHanddle} />}
+      {username ? <ChatLobby username={username} /> : <LoginIndex loginHanddle={loginHanddle} />}
     </div>
   );
 }

@@ -4,11 +4,11 @@ function ChatInput(props) {
 
     const [userInput, setuserInput] = useState('');
 
-    const handleChange = (event) => {
+    function handleChange(event) {
         setuserInput(event.target.value)
     }
 
-    const handleSubmit = (event) => {
+    function handleSubmit(event) {
         event.preventDefault();
         props.handleMessage(userInput);
         setuserInput('');
