@@ -7,9 +7,15 @@ export function userLogin(username) {
 }
 
 export function subscribeToRoom(room, cb) {
-    socket.on(room, message => {
-        cb(message);
+    socket.on('message', message => {
+        if(message.room === room) {
+            cb(message);
+        } 
     });
+}
+
+export function subscribeToCommands() {
+    
 }
 
 export function roomLeaveListner(cb) {

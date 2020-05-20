@@ -1,42 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import ChatRoom from './chatRoom.component';
-import { roomLeaveListner } from '../../socketAPI';
+import MainRoom from './mainRoom.component';
+// import { roomLeaveListner } from '../../socketAPI';
 
 function ChatLobby(props) {
-    const [rooms, setRooms] = useState([{ name: 'Global' }, { name: 'room1' }]);
-    const [newMessage, setNewMessage] = useState();
+    const [rooms, setRooms] = useState([]);
+    const { username } = props;
 
-    const testevent = (message) => {
-        setNewMessage(message);
+    //plutot un useeffect, du genre socket.on('joinRoom')
+    function handleJoinRoom() {
+
     }
 
-    useEffect(() => {
-        console.log('new render');
-    })
+    function handleLeaveRoom() {
+
+    }
+
+    // useEffect(() => {
+    //     console.log(rooms.length);
+    // })
+
 
     // const roomExample = {name: room};
-    useEffect(() => {
-        function leaveFN(roomToLeave) {
-            setRooms(rooms => rooms.filter(room => room.name != roomToLeave));
-        }
-        roomLeaveListner(leaveFN);
-    });
+    // useEffect(() => {
+    //     function leaveFN(roomToLeave) {
+    //         setRooms(rooms => rooms.filter(room => room.name !== roomToLeave));
+    //     }
+    //     roomLeaveListner(leaveFN);
+    // });
 
     return (
         <div className="main-frame container-fluid">
             <div className="row mt-4">
                 <div className="col-12">
-                    <Tabs forceRenderTabPanel={true}>
+                    <Tabs forceRenderTabPanel={true} defaultIndex={rooms.length}>
                         <TabList>
+                            <Tab>Main</Tab>
                             {rooms.map((room, i) => (
                                 <Tab key={i}>{room.name}</Tab>
                             ))}
                         </TabList>
 
+                        <TabPanel>
+                            <MainRoom username={username} />
+                        </TabPanel>
                         {rooms.map((room, i) => (
                             <TabPanel key={i}>
-                                <ChatRoom testevent={testevent} room={room.name} />
+                                <ChatRoom room={room.name} username={username} />
                             </TabPanel>
                         ))}
 

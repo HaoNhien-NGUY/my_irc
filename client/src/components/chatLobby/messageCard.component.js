@@ -1,12 +1,12 @@
 import React from 'react';
 
 function MessageCard(props) {
-    const { author, time, content } = props.messageData;
+    const { author, time, content, type } = props.messageData;
 
     return (
         <div className="message-card">
-            <h5><span className="username">{author}</span><span className="time text-secondary">{time}</span></h5>
-            <p>{content}</p>
+            <h5>{author && <span className={`username ${type === "user" ? "text-user" : "text-danger"}`}>{author}</span>}<span className="time">{time}</span></h5>
+            <p className={author || "text-secondary"}>{content}</p>
         </div>
     )
 }

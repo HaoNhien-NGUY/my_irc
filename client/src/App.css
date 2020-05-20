@@ -15,7 +15,7 @@ body {
 
 /* ------- chatrooms ------- */
 
-.user-list {
+.left-panel {
   background-color: #a2b3f0;
   margin-bottom: 0px;
   border-top-left-radius: 5px;
@@ -34,6 +34,7 @@ body {
   height: 39px;
   border-radius: 5px;
   border: none;
+  outline: none;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -71,14 +72,21 @@ body {
 }
 
 .message-card .username {
+  margin-right: 12px;
+}
+
+.message-card .text-user {
   color: #7289da;
-  margin-right: 5px;
+}
+
+.message-card p {
+  font-size: 1.2rem;
 }
 
 .message-card .time {
-  margin-left: 5px;
   font-weight: 400;
-  /* font-size: 90%; */
+  font-size: 82%;
+  color: rgba(0, 0, 0, 0.397);
 }
 
 /* ------- scrollbar ------- */

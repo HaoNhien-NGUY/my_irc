@@ -7,9 +7,8 @@ function ChatRoom(props) {
     const [messages, setMessages] = useState([]);
 
     function handleMessage(message) {
-        props.testevent(message);
-        if(message = message.trim()) {
-            // socket.emit('clientMessage', { room: props.room, content: message });
+        if((message = message.trim()) !== "") {
+            socket.emit('clientMessage', { room: props.room, content: message, type: 'user' });
         }
     }
 
@@ -20,15 +19,14 @@ function ChatRoom(props) {
     }, [messages]);
 
 
-    //ce listner va etre deplacer dans un component parent ??
     useEffect(() => {
         function newMessageFN(messageData) {
-            setMessages(messages => [...messages, { author: messageData.author, time: messageData.time, content: messageData.content }]);
+            setMessages(messages => [...messages, messageData ]);
         }
         subscribeToRoom(props.room, newMessageFN);
 
         return function cleanup() {
-            socket.removeListener(props.room, newMessageFN);
+            socket.removeListener('message', newMessageFN);
         };
     }, [props.room]);
 
@@ -37,11 +35,11 @@ function ChatRoom(props) {
     // 
 
     return (
-        <div style={{ height: '43rem' }}>
+        <div style={{ height: '44rem' }}>
             <div className="container-fluid h-100 mt-2">
                 <div className="row h-100">
                     <div className="col-3 pl-0 pr-1 h-100">
-                        <div className="user-list w-100" style={{ height: '100%' }}>
+                        <div className="left-panel w-100" style={{ height: '100%' }}>
 
                         </div>
                         <div className="bottom-panel">
