@@ -89,6 +89,10 @@ body {
   color: rgba(0, 0, 0, 0.397);
 }
 
+.message-card .info {
+  font-style: italic;
+}
+
 /* ------- scrollbar ------- */
 
 /* width */

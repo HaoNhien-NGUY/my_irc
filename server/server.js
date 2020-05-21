@@ -8,7 +8,6 @@ const userManager = require('./services/users');
 io.on('connection', socket => {
     console.log('A user connected');
 
-
     socket.on('login', (username) => {
         socket.username = username;
         console.log(`you are logged in as ${username}`);
@@ -25,10 +24,17 @@ io.on('connection', socket => {
         //logique if room existe blabla
         socket.join(room);
         let time = moment().format("DD/MM/YYYY HH:mm");
-        socket.to(room).emit('message', { content:`${socket.username} has joined the chat`, room, time});
-        socket.emit('message', {room, content: `You joined ${room}`, time})
+        socket.to(room).emit('message', { content:`${socket.username} has joined the room`, room, time});
+        socket.emit('joinRoom', {name: room, time})
     });
 
+    socket.on('part', room => {
+        //if room === 'Main' then message you cant leave this room
+        console.log(room);
+        socket.leave(room);
+        socket.to(room).emit('message', { content:`${socket.username} has left the room`, room, time: moment().format("DD/MM/YYYY HH:mm")});
+        socket.emit('leaveRoom', room);
+    })
     //event for Main channel,
     //event for all channel
 

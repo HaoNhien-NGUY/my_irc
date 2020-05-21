@@ -8,20 +8,34 @@ export function userLogin(username) {
 
 export function subscribeToRoom(room, cb) {
     socket.on('message', message => {
-        if(message.room === room) {
+        if (message.room === room) {
             cb(message);
-        } 
+        }
     });
 }
 
-export function subscribeToCommands() {
-    
+export function joinRoomListner(cb) {
+    socket.on('joinRoom', roomData => {
+        cb(roomData);
+    })
 }
 
-export function roomLeaveListner(cb) {
-    socket.on('roomLeave', room => {
+export function leaveRoomListner(cb) {
+    socket.on('leaveRoom', room => {
         cb(room);
     });
+}
+
+export function handleCommand(message) {
+    let action = message.split(" ")[0].substring(1);
+    if (['join', 'nick', 'create', 'delete', 'list', 'part', 'users', 'msg'].includes(action)) {
+        let command = message.substring(action.length + 1).trim();
+        socket.emit(action, command);
+        console.log(command);
+        return true;
+    } else {
+        return action;
+    }
 }
 
 // export function clientEmitMessage(room, content) {

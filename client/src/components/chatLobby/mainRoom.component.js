@@ -1,21 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ChatInput from './chatInput.component';
 import MessageCard from './messageCard.component'
-import {welcomeMessage} from '../../services/chatBot';
-import socket, { subscribeToRoom } from '../../socketAPI';
+import { botWelcome, botCommandError} from '../../services/chatBot';
+import socket, { subscribeToRoom, handleCommand } from '../../socketAPI';
 
 function ChatRoom(props) {
-    const [messages, setMessages] = useState([...welcomeMessage(props.username)]);
+    const [messages, setMessages] = useState([...botWelcome(props.username)]);
 
     function handleMessage(message) {
         message = message.trim();
         if (message.charAt(0) === "/") {
-            let action = message.split(" ")[0].substring(1);
-            if(['join', 'nick', 'create' , 'delete', 'list', 'part', 'users', 'msg'].includes(action)) {
-                let command = message.substring(action.length+1).trim();
-                socket.emit(action, command);
-            } else {
-                setMessages([...messages, {author: 'chatBOT', content:`'/${action}' command doesn't exist.`, type: 'bot'}])
+            let action = handleCommand(message);
+            if(action !== true )
+            {
+                setMessages([...messages, botCommandError(action)]);
             }
         }
         else if (message !== "") {
@@ -32,8 +30,6 @@ function ChatRoom(props) {
 
     useEffect(() => {
         function newMessageFN(messageData) {
-            console.log(messageData);
-            
             setMessages(messages => [...messages, messageData ]);
         }
         subscribeToRoom('Main', newMessageFN);

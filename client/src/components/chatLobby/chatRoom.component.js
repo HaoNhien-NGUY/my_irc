@@ -1,14 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ChatInput from './chatInput.component';
-import MessageCard from './messageCard.component'
-import socket, { subscribeToRoom } from '../../socketAPI';
+import MessageCard from './messageCard.component';
+import { botJoinRoom, botCommandError } from '../../services/chatBot';
+import socket, { subscribeToRoom, handleCommand } from '../../socketAPI';
 
 function ChatRoom(props) {
-    const [messages, setMessages] = useState([]);
+    const { room } = props;
+    const [messages, setMessages] = useState([botJoinRoom(room)]);
 
     function handleMessage(message) {
-        if((message = message.trim()) !== "") {
-            socket.emit('clientMessage', { room: props.room, content: message, type: 'user' });
+        message = message.trim();
+        if (message.charAt(0) === "/") {
+            let action = handleCommand(message);
+            if(action !== true )
+            {
+                setMessages([...messages, botCommandError(action)]);
+            }
+        }
+        else if(message !== "") {
+            socket.emit('clientMessage', { room: room.name, content: message, type: 'user' });
         }
     }
 
@@ -23,12 +33,12 @@ function ChatRoom(props) {
         function newMessageFN(messageData) {
             setMessages(messages => [...messages, messageData ]);
         }
-        subscribeToRoom(props.room, newMessageFN);
+        subscribeToRoom(room.name, newMessageFN);
 
         return function cleanup() {
             socket.removeListener('message', newMessageFN);
         };
-    }, [props.room]);
+    }, [room.name]);
 
     //userEffect to see connected user
     // 

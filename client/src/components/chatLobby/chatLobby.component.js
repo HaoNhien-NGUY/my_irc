@@ -2,24 +2,29 @@ import React, { useEffect, useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import ChatRoom from './chatRoom.component';
 import MainRoom from './mainRoom.component';
-// import { roomLeaveListner } from '../../socketAPI';
+import { joinRoomListner, leaveRoomListner } from '../../socketAPI';
 
 function ChatLobby(props) {
     const [rooms, setRooms] = useState([]);
+    const [currentTab, setCurrentTab] = useState(0);
     const { username } = props;
+    
+    useEffect(() => {
+        function joinRoomFN(roomData) {
+            setRooms(rooms => [...rooms, roomData]);
+        }
+        function leaveRoomFN(roomName) {
+            console.log(roomName);
+            
+            setRooms(rooms => rooms.filter(room => room.name !== roomName))
+        }
+        joinRoomListner(joinRoomFN);
+        leaveRoomListner(leaveRoomFN);
+    },[]);
 
-    //plutot un useeffect, du genre socket.on('joinRoom')
-    function handleJoinRoom() {
-
-    }
-
-    function handleLeaveRoom() {
-
-    }
-
-    // useEffect(() => {
-    //     console.log(rooms.length);
-    // })
+    useEffect(() => {
+        setCurrentTab(rooms.length);
+    }, [rooms]);
 
 
     // const roomExample = {name: room};
@@ -34,7 +39,7 @@ function ChatLobby(props) {
         <div className="main-frame container-fluid">
             <div className="row mt-4">
                 <div className="col-12">
-                    <Tabs forceRenderTabPanel={true} defaultIndex={rooms.length}>
+                    <Tabs forceRenderTabPanel={true} selectedIndex={currentTab} onSelect={(index) => setCurrentTab(index)} >
                         <TabList>
                             <Tab>Main</Tab>
                             {rooms.map((room, i) => (
@@ -45,9 +50,9 @@ function ChatLobby(props) {
                         <TabPanel>
                             <MainRoom username={username} />
                         </TabPanel>
-                        {rooms.map((room, i) => (
-                            <TabPanel key={i}>
-                                <ChatRoom room={room.name} username={username} />
+                        {rooms.map((room) => (
+                            <TabPanel key={room.name}>
+                                <ChatRoom room={room} username={username} />
                             </TabPanel>
                         ))}
 
