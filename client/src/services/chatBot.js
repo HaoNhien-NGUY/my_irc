@@ -20,9 +20,9 @@ export function botWelcome(username) {
 
 export function botJoinRoom(room) {
     const content = (
-        <span>You joined <i>{room.name}</i></span>
+        <span>You joined <i>#{room.name}</i></span>
     )
-    return { ...botInfo, content, time: room.time };
+    return { content, time: room.time };
 }
 
 export function botCommandError(action) {

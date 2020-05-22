@@ -14,8 +14,6 @@ function ChatLobby(props) {
             setRooms(rooms => [...rooms, roomData]);
         }
         function leaveRoomFN(roomName) {
-            console.log(roomName);
-            
             setRooms(rooms => rooms.filter(room => room.name !== roomName))
         }
         joinRoomListner(joinRoomFN);
@@ -26,24 +24,15 @@ function ChatLobby(props) {
         setCurrentTab(rooms.length);
     }, [rooms]);
 
-
-    // const roomExample = {name: room};
-    // useEffect(() => {
-    //     function leaveFN(roomToLeave) {
-    //         setRooms(rooms => rooms.filter(room => room.name !== roomToLeave));
-    //     }
-    //     roomLeaveListner(leaveFN);
-    // });
-
     return (
         <div className="main-frame container-fluid">
             <div className="row mt-4">
                 <div className="col-12">
                     <Tabs forceRenderTabPanel={true} selectedIndex={currentTab} onSelect={(index) => setCurrentTab(index)} >
                         <TabList>
-                            <Tab>Main</Tab>
-                            {rooms.map((room, i) => (
-                                <Tab key={i}>{room.name}</Tab>
+                            <Tab>Home</Tab>
+                            {rooms.map((room) => (
+                                <Tab key={room.name}>#{room.name}</Tab>
                             ))}
                         </TabList>
 

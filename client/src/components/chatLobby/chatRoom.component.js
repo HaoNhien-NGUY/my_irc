@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import ChatInput from './chatInput.component';
 import MessageCard from './messageCard.component';
 import { botJoinRoom, botCommandError } from '../../services/chatBot';
-import socket, { subscribeToRoom, handleCommand } from '../../socketAPI';
+import socket, { subscribeToRoom, handleCommand, sendMessage } from '../../socketAPI';
 
 function ChatRoom(props) {
     const { room } = props;
@@ -11,14 +11,14 @@ function ChatRoom(props) {
     function handleMessage(message) {
         message = message.trim();
         if (message.charAt(0) === "/") {
-            let action = handleCommand(message);
+            let action = handleCommand(message, room.name);
             if(action !== true )
             {
                 setMessages([...messages, botCommandError(action)]);
             }
         }
         else if(message !== "") {
-            socket.emit('clientMessage', { room: room.name, content: message, type: 'user' });
+            sendMessage(message, room.name);
         }
     }
 

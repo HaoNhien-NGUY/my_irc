@@ -10,7 +10,7 @@ function ChatRoom(props) {
     function handleMessage(message) {
         message = message.trim();
         if (message.charAt(0) === "/") {
-            let action = handleCommand(message);
+            let action = handleCommand(message, '_main');
             if(action !== true )
             {
                 setMessages([...messages, botCommandError(action)]);
@@ -32,7 +32,7 @@ function ChatRoom(props) {
         function newMessageFN(messageData) {
             setMessages(messages => [...messages, messageData ]);
         }
-        subscribeToRoom('Main', newMessageFN);
+        subscribeToRoom('_main', newMessageFN);
 
         return function cleanup() {
             socket.removeListener('message', newMessageFN);
