@@ -12,7 +12,7 @@ export function botWelcome(username) {
         <br /><b>/join</b> [channel] : join a [channel].
         <br /><b>/part</b> [channel] : quit a [channel]
         <br /><b>/users</b> : list all users in the channel.
-        <br /><b>/msg</b> [nickname] [message] : send a [message] to a specified [nickname].
+        <br /><b>/msg</b> [nickname;] [message] : send a [message] to a specified [nickname].
     </span>
     )
     return [{ ...botInfo, content }, { ...botInfo, content: 'You will receive privates messages here.' }];

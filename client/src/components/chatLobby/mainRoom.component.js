@@ -1,23 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ChatInput from './chatInput.component';
-import MessageCard from './messageCard.component'
-import { botWelcome, botCommandError} from '../../services/chatBot';
-import socket, { subscribeToRoom, handleCommand } from '../../socketAPI';
+import MessageCard from './messageCard.component';
+import RoomList from './home/roomList.component';
+import ActionPanel from './home/actionPanel.component';
+import { botWelcome, botCommandError } from '../../services/chatBot';
+import socket, { subscribeToRoom, handleCommand, subscribeToRoomList } from '../../socketAPI';
 
 function ChatRoom(props) {
-    const [messages, setMessages] = useState([...botWelcome(props.username)]);
+    const { username } = props.user;
+    const [messages, setMessages] = useState([...botWelcome(username)]);
+    const [roomList, setRoomList] = useState([]);
 
     function handleMessage(message) {
         message = message.trim();
         if (message.charAt(0) === "/") {
             let action = handleCommand(message, '_main');
-            if(action !== true )
-            {
+            if (action !== true) {
                 setMessages([...messages, botCommandError(action)]);
             }
         }
         else if (message !== "") {
-            setMessages([...messages,  {author: 'chatBOT', content:`Only type commands here.`, type: 'bot'}])
+            setMessages([...messages, { author: 'chatBOT', content: `Only type commands here.`, type: 'bot' }])
         }
     }
 
@@ -30,12 +33,17 @@ function ChatRoom(props) {
 
     useEffect(() => {
         function newMessageFN(messageData) {
-            setMessages(messages => [...messages, messageData ]);
+            setMessages(messages => [...messages, messageData]);
+        }
+        function roomListFN(list) {
+            setRoomList(list);
         }
         subscribeToRoom('_main', newMessageFN);
+        subscribeToRoomList(roomListFN);
 
         return function cleanup() {
             socket.removeListener('message', newMessageFN);
+            socket.removeListener('roomListUpdate', roomListFN);
         };
     }, []);
 
@@ -45,14 +53,18 @@ function ChatRoom(props) {
 
     return (
         <div style={{ height: '44rem' }}>
-            <div className="container-fluid h-100 mt-2">
+            <div className="container-fluid home-panel h-100 mt-2">
                 <div className="row h-100">
                     <div className="col-6 pl-0 pr-1 h-100">
-                        <div className="left-panel w-100" style={{ height: '100%' }}>
-
+                        <div className="left-panel w-100 container-fluid" style={{ height: '100%' }}>
+                            <h1 className="pl-3 py-3">my_irc</h1>
+                            <div className="row" style={{ height: '84%', paddingTop: '36px' }}>
+                                <RoomList list={roomList} />
+                                <ActionPanel room={'_main'} username={username} />
+                            </div>
                         </div>
                         <div className="bottom-panel">
-
+                            <h3 className="px-4 d-inline-block">@{username}</h3>
                         </div>
                     </div>
                     <div className="col-6 h-100 pr-0">

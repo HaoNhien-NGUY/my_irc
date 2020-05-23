@@ -7,7 +7,7 @@ import { joinRoomListner, leaveRoomListner } from '../../socketAPI';
 function ChatLobby(props) {
     const [rooms, setRooms] = useState([]);
     const [currentTab, setCurrentTab] = useState(0);
-    const { username } = props;
+    const { user } = props;
     
     useEffect(() => {
         function joinRoomFN(roomData) {
@@ -37,11 +37,11 @@ function ChatLobby(props) {
                         </TabList>
 
                         <TabPanel>
-                            <MainRoom username={username} />
+                            <MainRoom user={user} />
                         </TabPanel>
                         {rooms.map((room) => (
                             <TabPanel key={room.name}>
-                                <ChatRoom room={room} username={username} />
+                                <ChatRoom room={room} user={user} />
                             </TabPanel>
                         ))}
 

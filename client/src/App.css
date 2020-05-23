@@ -62,6 +62,35 @@ body {
   margin: 0px;
 }
 
+.chat-room .left-panel .room-name {
+  color: #7289da;
+  font-weight: 900;
+
+  /* border-bottom: solid 1px #7289da; */
+}
+
+.user-list {
+  height: 80%;
+}
+
+.user-list .list {
+  height: 90%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.user-list .list-item {
+  color: rgb(255, 255, 255);
+}
+
+.user-list .list-title {
+  color: #7289da;
+}
+
+.user-list .list-item span{
+  font-size: 1.5rem;
+}
+
 /* ------- message card ------- */
 
 .message-card {
@@ -93,29 +122,81 @@ body {
   font-style: italic;
 }
 
-/* ------- scrollbar ------- */
+/* ------- Home-panel -------*/
+.home-panel h1 {
+  color: #7289da;
+  font-weight: bold;
+  border-bottom: solid 1px #7289da;
+}
 
-/* width */
+.home-panel .room-list, .home-panel .action-panel{
+  border-radius: 5px;
+  height: 98%;
+}
+
+.home-panel .room-list {
+  background-color: white;
+}
+
+.room-list h3 {
+  background-color: #7289da36;
+  color: #7289da;
+}
+
+.room-list .list {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 86%;
+}
+
+.room-list .list-item {
+  font-size: 1.4rem;
+}
+
+.room-list .list-item span {
+  max-width: 80%;
+  overflow: hidden;
+}
+
+.action-panel .form {
+  background-color: #7289da;
+  border-radius: 5px;
+  padding: 10px 15px;
+}
+
+.action-panel .form .btn-create {
+  color: white;
+  border-radius: 0.25rem;
+  border: solid 1px white;
+}
+
+.action-panel h4 {
+  /* color: white; */
+  color: white;
+  font-weight: bold;
+}
+
+.bottom-panel h3 {
+  font-weight: bold;
+  /* -webkit-text-stroke: 1px black; */
+  color: white;
+}
+
+/* ------- scrollbar ------- */
 
 ::-webkit-scrollbar {
   width: 10px;
 }
 
-/* Track */
-
 ::-webkit-scrollbar-track {
-  background: #ffffff;
+  background: #ffffff00;
   border-radius: 5px;
 }
-
-/* Handle */
 
 ::-webkit-scrollbar-thumb {
   background: #afbcea;
   border-radius: 5px;
 }
-
-/* Handle on hover */
 
 ::-webkit-scrollbar-thumb:hover {
   background: #7289dac9;

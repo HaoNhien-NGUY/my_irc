@@ -18,9 +18,9 @@ function LoginForm(props) {
     <div className="login-form pt-3">
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          {/* <label for="usernameInput" style={{fontSize:'120%', color:'#424549'}}>Enter your username</label> */}
-          <input type="text" placeholder="Enter your username" className="form-control" style={{ fontSize: '20px', borderColor:'#7289da' }} id="usernameInput" autoComplete="off" value={username} onChange={handleChange} />
-          <button type="submit" className="btn btn-outline-primary mt-3" style={{borderColor:'#7289da', color:'#7289da'}}>Login</button>
+          <input type="text" placeholder="Enter your username" className="form-control" style={{ fontSize: '20px', borderColor: '#7289da' }} id="usernameInput" autoComplete="off" value={username} onChange={handleChange} />
+          {props.error.error && <small className="form-text text-danger">{props.error.message}</small>}
+          <button type="submit" className="btn btn-outline-primary mt-3" style={{ borderColor: '#7289da', color: '#7289da' }}>Login</button>
         </div>
       </form>
     </div>

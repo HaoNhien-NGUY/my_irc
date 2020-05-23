@@ -15,13 +15,27 @@ export function subscribeToRoom(room, cb) {
 }
 
 export function subscribeToUserList(room, cb) {
-    //on join
-    //on leave
-    //return a json userlist
+    socket.on('userListUpdate', data => {
+        if (data.room === room){
+            cb(data);
+        }
+    });
+}
+
+export function subscribeToRoomList(cb) {
+    socket.on('roomListUpdate', list => {
+        cb(list);
+    });
 }
 
 export function sendMessage(content, room) {
     socket.emit('clientMessage', { room, content, type: 'user' });
+}
+
+export function userInfoListner(cb) {
+    socket.on('userInfo', user => {
+        cb(user);
+    });
 }
 
 export function joinRoomListner(cb) {
