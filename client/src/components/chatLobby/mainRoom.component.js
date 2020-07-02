@@ -57,7 +57,7 @@ function ChatRoom(props) {
                 <div className="row h-100">
                     <div className="col-6 pl-0 pr-1 h-100">
                         <div className="left-panel w-100 container-fluid" style={{ height: '100%' }}>
-                            <h1 className="pl-3 py-3">my_irc</h1>
+                            <h1 className="pl-3 py-3">my_irc<small style={{fontSize :"15px", paddingLeft : "10px" }} >By NGUYEN Hao-Nhien.</small></h1>
                             <div className="row" style={{ height: '84%', paddingTop: '26px' }}>
                                 <RoomList list={roomList} />
                                 <ActionPanel room={'_main'} username={username} />
