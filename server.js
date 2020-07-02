@@ -5,7 +5,7 @@ const io = require('socket.io')(server);
 const moment = require('moment');
 const manager = require('./services/manager');
 const path = require('path');
-const PORT = process.env.PORT || 4242;
+const PORT = process.env.PORT;
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.get('/*', (req, res) => {
