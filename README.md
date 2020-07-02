@@ -7,7 +7,7 @@ Ce projet est ma vraie première expérience avec React.js et aussi ma première
 
 
 
-### Cahier des charges
+## Cahier des charges
 
 Gestion des utilisateurs
   + Un système de connexion : l’utilisateur de votre site doit pouvoir se connecter en fournissant un nom d’utilisateur.
