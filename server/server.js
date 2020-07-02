@@ -60,15 +60,31 @@ io.on('connection', socket => {
 
     socket.on('part', data => {
         let room = !data.command ? data.room : data.command;
+
         if (room in socket.rooms) {
             socket.leave(room);
             socket.to(room).emit('message', { content: `@${socket.username} has left the room`, room, time: moment().format("DD/MM/YYYY HH:mm") });
             socket.emit('leaveRoom', room);
             io.in(room).clients((error, socketIds) => {
                 if (error) throw error;
-                let list = []
-                socketIds.forEach(socketId => list.push(`@${io.sockets.sockets[socketId].username}`));
-                io.in(room).emit('userListUpdate', { room, list });
+                if (socketIds.length) {
+                    let list = []
+                    socketIds.forEach(socketId => list.push(`@${io.sockets.sockets[socketId].username}`));
+                    io.in(room).emit('userListUpdate', { room, list });
+                } else {
+                    //if nobody is in the room the next hour, delete it.
+                    setTimeout(() => {
+                        io.in(room).clients((error, socketIds) => {
+                            if (!socketIds.length) {
+                                let time = moment().format("DD/MM/YYYY HH:mm");
+                                manager.roomDelete(room);
+                                if (socket.id != room)
+                                    socket.broadcast.emit('message', { content: `The room #${room} was deleted.`, room: '_global', time });
+                                io.emit('roomListUpdate', manager.getRoomsList());
+                            }
+                        });
+                    }, 1000 * 60 * 60);
+                }
             });
         } else {
             socket.emit('message', { ...botInfo, room: data.room, content: 'Can\'t leave a room you\'re not in !' });
@@ -195,14 +211,31 @@ io.on('connection', socket => {
     socket.on('disconnecting', function () {
         manager.userRemove(socket.id);
         for (const roomName in socket.rooms) {
+            socket.leave(roomName);
             io.to(roomName).emit('message', { content: `${socket.username} has left the room`, room: roomName, time: moment().format("DD/MM/YYYY HH:mm") });
             io.in(roomName).clients((error, socketIds) => {
                 if (error) throw error;
-                let list = [];
-                socketIds.forEach(socketId => {
-                    if (io.sockets.sockets[socketId]) list.push(`@${io.sockets.sockets[socketId].username}`);
-                });
-                io.in(roomName).emit('userListUpdate', { room: roomName, list });
+                if (socketIds.length) {
+                    let list = [];
+                    socketIds.forEach(socketId => {
+                        if (io.sockets.sockets[socketId]) list.push(`@${io.sockets.sockets[socketId].username}`);
+                    });
+                    io.in(roomName).emit('userListUpdate', { room: roomName, list });
+                } else {
+
+                    //if nobody is in the room the next hour, delete it.
+                    setTimeout(() => {
+                        io.in(roomName).clients((error, socketIds) => {
+                            if (!socketIds.length) {
+                                let time = moment().format("DD/MM/YYYY HH:mm");
+                                manager.roomDelete(roomName);
+                                if (socket.id != roomName)
+                                    socket.broadcast.emit('message', { content: `The room #${roomName} was deleted.`, room: '_global', time });
+                                io.emit('roomListUpdate', manager.getRoomsList());
+                            }
+                        });
+                    }, 1000 * 60 * 60);
+                }
             });
         }
     });
