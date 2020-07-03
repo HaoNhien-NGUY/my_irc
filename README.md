@@ -6,6 +6,12 @@ Réalisation d'un serveur IRC grâce à Node.js / Express.js / Socket.IO.
 
 Ce projet est ma vraie première expérience avec React.js et aussi ma première introduction aux WebSockets notamment avec Socket.IO.
 
+# Technologies
+
+ - Node.js
+ - Socket.IO
+ - Express.js
+ - React.js
 
 ## Cahier des charges
 
