@@ -1,13 +1,13 @@
+# [Live Demo](https://haonhien-my-irc.herokuapp.com/)
+
+
 # Présentation
 Réalisation d'un serveur IRC grâce à Node.js / Express.js / Socket.IO.
 
 Ce projet est ma vraie première expérience avec React.js et aussi ma première introduction aux WebSockets notamment avec Socket.IO.
 
-## [Live Demo](https://haonhien-my-irc.herokuapp.com/)
 
-
-
-# Cahier des charges
+## Cahier des charges
 
 Gestion des utilisateurs
   + Un système de connexion : l’utilisateur de votre site doit pouvoir se connecter en fournissant un nom d’utilisateur.
