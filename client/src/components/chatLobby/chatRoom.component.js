@@ -61,13 +61,13 @@ function ChatRoom(props) {
                 <div className="row h-100">
                     <div className="col-3 pl-0 pr-1 h-100">
                         <div className="left-panel w-100 container-fluid" style={{ height: '100%' }}>
-                            <h3 className="py-3 pl-2 mb-4 room-name">#{room.name}</h3>
+                            <h2 className="py-3 pl-2 mb-3 room-name">#{room.name}</h2>
                             <UserList list={userList} />
                         </div>
                         <div className="bottom-panel d-flex justify-content-between">
-                            <h3 className="px-4 m-0 d-inline-block">@{username}</h3>
-                            <div>
-                                <button onClick={deleteRoom} className="btn btn-danger disabled" style={{ margin: '5px 15px 12px 0px' }}>Delete room</button>
+                            <h3 className="px-4 m-0 d-inline-block" style={{overflow : 'hidden', maxWidth: "50%"}}>@{username}</h3>
+                            <div className="d-flex">
+                                <button onClick={deleteRoom} className="btn btn-danger disabled" style={{ margin: '5px 15px 12px 0px', overflow: "hidden" }}>Delete room</button>
                                 <button onClick={leaveRoom} className="btn btn-info" style={{ margin: '5px 15px 12px 0px' }}>leave</button>
                             </div>
                         </div>

@@ -6,7 +6,7 @@ function UserList(props) {
 
     return (
         <div className="user-list">
-            <h3 className="list-title pl-2">Users ({list.length})</h3>
+            <h4 className="list-title pl-2">Online &nbsp;&nbsp;-&nbsp;&nbsp; {list.length}</h4>
             <div className="list">
                 {list.map(user => <ListItem user={user} key={user}/>)}
             </div>

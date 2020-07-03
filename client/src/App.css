@@ -183,6 +183,7 @@ body {
 .bottom-panel h3 {
   /* font-weight: bold; */
   /* -webkit-text-stroke: 1px black; */
+  padding-right: 0px !important;
   color: white;
 }
 
